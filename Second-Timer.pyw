@@ -14,9 +14,10 @@ label.pack(pady=20)
 def plus():
     current = int(label.cget("text"))
     label.config(text=str(current + 1))
-    win.after(1000, plus)  # 1 saniye sonra tekrar çalışacak
+    win.after(1000, plus)
 
 button = tk.Button(win, text="START", command=plus)
 button.pack(pady=10)
 
 win.mainloop()
+
