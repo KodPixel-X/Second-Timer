@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 win = tk.Tk()
 win.title("KodPixel-X-Second-Timer")
-win.geometry("570x570")
+win.geometry("580x580")
 
 
 
@@ -77,8 +77,8 @@ def LightTheme():
 
 
 def DefaultTheme():
-   win.config(bg="red")
-   button.config(bg="yellow")
+   win.config(bg="white")
+   button.config(bg="green")
    buttonb.config(bg="yellow")
    buttonr.config(bg="yellow")
    buttong.config(bg="yellow")
@@ -86,8 +86,8 @@ def DefaultTheme():
    buttonbb.config(bg="yellow")
    buttonw.config(bg="yellow")
    buttono.config(bg="yellow")
-   buttonPause.config(bg="yellow")
-   buttonStop.config(bg="yellow")
+   buttonPause.config(bg="orange")
+   buttonStop.config(bg="red")
    buttonabout.config(bg="yellow")
    button.config(fg="black")
    buttonb.config(fg="black")
