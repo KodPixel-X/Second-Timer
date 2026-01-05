@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 win = tk.Tk()
 win.title("KodPixel-X-Second-Timer")
-win.geometry("580x580")
+win.geometry("790x630")
 
 
 def about():
@@ -20,6 +20,7 @@ def DarkTheme():
    buttonr.config(bg="white")
    buttong.config(bg="white")
    buttony.config(bg="white")
+   txtbutton2.config(bg="white")
    buttonbb.config(bg="white")
    buttonw.config(bg="white")
    buttono.config(bg="white")
@@ -29,6 +30,7 @@ def DarkTheme():
    button.config(fg="black")
    buttonb.config(fg="black")
    buttonr.config(fg="black")
+   txtbutton2.config(fg="black")
    txtsavebutton(bg="white")
    txtsavebutton(fg="black")
    buttong.config(fg="black")
@@ -48,30 +50,32 @@ def DarkTheme():
 
 def LightTheme():
    win.config(bg="white")
-   button.config(bg="black")
-   buttonb.config(bg="black")
-   buttonr.config(bg="black")
-   txtsavebutton(bg="black")
-   txtsavebutton(fg="white")
-   buttong.config(bg="black")
-   buttony.config(bg="black")
-   buttonbb.config(bg="black")
-   buttonw.config(bg="black")
-   buttono.config(bg="black")
-   buttonPause.config(bg="black")
-   buttonStop.config(bg="black")
-   buttonabout.config(bg="black")
-   button.config(fg="white")
-   buttonb.config(fg="white")
-   buttonr.config(fg="white")
-   buttong.config(fg="white")
-   buttony.config(fg="white")
-   buttonbb.config(fg="white")
-   buttonw.config(fg="white")
-   buttono.config(fg="white")
-   buttonPause.config(fg="white")
-   buttonStop.config(fg="white")
-   buttonabout.config(fg="white")
+   button.config(bg="white")
+   buttonb.config(bg="white")
+   txtbutton2.config(bg="white")
+   buttonr.config(bg="white")
+   txtsavebutton(bg="white")
+   txtsavebutton(fg="black")
+   buttong.config(bg="white")
+   buttony.config(bg="white")
+   buttonbb.config(bg="white")
+   buttonw.config(bg="white")
+   buttono.config(bg="white")
+   buttonPause.config(bg="white")
+   buttonStop.config(bg="white")
+   buttonabout.config(bg="white")
+   button.config(fg="black")
+   buttonb.config(fg="black")
+   buttonr.config(fg="black")
+   buttong.config(fg="black")
+   txtbutton2.config(fg="black")
+   buttony.config(fg="black")
+   buttonbb.config(fg="black")
+   buttonw.config(fg="black")
+   buttono.config(fg="black")
+   buttonPause.config(fg="black")
+   buttonStop.config(fg="black")
+   buttonabout.config(fg="black")
    config['settings'] = {
        'color': 'lighttheme'
    }
@@ -85,17 +89,19 @@ def DefaultTheme():
    buttonb.config(bg="yellow")
    buttonr.config(bg="yellow")
    buttong.config(bg="yellow")
+   txtbutton2.config(bg="yellow")
    buttony.config(bg="yellow")
    buttonbb.config(bg="yellow")
    buttonw.config(bg="yellow")
    buttono.config(bg="yellow")
    buttonPause.config(bg="orange")
    buttonStop.config(bg="red")
-   buttonabout.config(bg="yellow")
+   buttonabout.config(bg="blue")
    txtsavebutton.config(bg="green")
    txtsavebutton.config(fg="black")
    button.config(fg="black")
    buttonb.config(fg="black")
+   txtbutton2.config(fg="black")
    buttonr.config(fg="black")
    buttong.config(fg="black")
    buttony.config(fg="black")
@@ -209,13 +215,23 @@ def orange():
      config.write(f)
 
 def txtsave2():
+   
+   global desktop
+
    desktop = os.path.join(os.path.expanduser("~"), "Desktop")
    txtsave3 = txtsave.get()
 
-   filename = os.path.join(desktop, "save.txt")
+   global filename
+   filename = os.path.join(desktop, txtsave9)
 
    with open(filename, "w") as f:
       f.write(txtsave3 + "\n")
+
+def txtsave4():
+   global txtsave9
+   txtsave9 = txtsavebuttonentry.get()
+   filename = os.path.join(desktop, txtsave9)
+
 
 label = tk.Label(win, text="0", font=("Arial", 25))
 label.pack(pady=20)
@@ -289,11 +305,23 @@ txtsave.pack()
 
 txtsave.bind("<Return>", txtsave2)
 
-labeltxtsave = tk.Label(win, text="Enter the second you stopped in the box above and press the button below to save, and make sure to fill in the box before pressing the button.", font=("Arial", 10))
+labeltxtsave = tk.Label(win, text="Enter the second you stopped in the box above and press the button below to save, and make sure to fill in the box before pressing the button.", font=("Arial", 8))
 labeltxtsave.pack()
 
 txtsavebutton = tk.Button(win, text="Save", command=txtsave2)
 txtsavebutton.pack()
+
+txtsavebuttonentry = tk.Entry(win)
+txtsavebuttonentry.pack()
+
+labeltxtsave9 = tk.Label(win, text="Fill in the box above. We will save this. You can specify your file name and extension, and then press the Rename File button to save both the file name and its extension.", font=("Arial", 7))
+labeltxtsave9.pack()
+
+txtbutton2 = tk.Button(win, text="Filename Change", command=txtsave4)
+txtbutton2.pack()
+
+txtsavebuttonentry.bind("<Return>", txtsave4)
+
 
 config = configparser.ConfigParser()
 
