@@ -2,6 +2,7 @@ import configparser
 import os
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import filedialog
 
 win = tk.Tk()
 win.title("KodPixel-X-Second-Timer")
@@ -20,19 +21,19 @@ def DarkTheme():
    buttonr.config(bg="white")
    buttong.config(bg="white")
    buttony.config(bg="white")
-   txtbutton2.config(bg="white")
    buttonbb.config(bg="white")
    buttonw.config(bg="white")
    buttono.config(bg="white")
+   txtopenb.config(bg="white")
    buttonPause.config(bg="white")
    buttonStop.config(bg="white")
    buttonabout.config(bg="white")
    button.config(fg="black")
    buttonb.config(fg="black")
    buttonr.config(fg="black")
-   txtbutton2.config(fg="black")
    txtsavebutton(bg="white")
    txtsavebutton(fg="black")
+   txtopenb.config(bg="black")
    buttong.config(fg="black")
    buttony.config(fg="black")
    buttonbb.config(fg="black")
@@ -54,8 +55,8 @@ def LightTheme():
     buttonb.config(bg="white")
     buttonr.config(bg="white")
     buttong.config(bg="white")
-    txtbutton2.config(bg="white")
     buttony.config(bg="white")
+    txtopenb.config(bg="white")
     buttonbb.config(bg="white")
     buttonw.config(bg="white")
     buttono.config(bg="white")
@@ -66,7 +67,7 @@ def LightTheme():
     txtsavebutton.config(fg="black")
     button.config(fg="black")
     buttonb.config(fg="black")
-    txtbutton2.config(fg="black")
+    txtopenb.config(fg="black")
     buttonr.config(fg="black")
     buttong.config(fg="black")
     buttony.config(fg="black")
@@ -89,9 +90,9 @@ def DefaultTheme():
    buttonb.config(bg="yellow")
    buttonr.config(bg="yellow")
    buttong.config(bg="yellow")
-   txtbutton2.config(bg="yellow")
    buttony.config(bg="yellow")
    buttonbb.config(bg="yellow")
+   txtopenb.config(bg="yellow")
    buttonw.config(bg="yellow")
    buttono.config(bg="yellow")
    buttonPause.config(bg="orange")
@@ -101,9 +102,9 @@ def DefaultTheme():
    txtsavebutton.config(fg="black")
    button.config(fg="black")
    buttonb.config(fg="black")
-   txtbutton2.config(fg="black")
    buttonr.config(fg="black")
    buttong.config(fg="black")
+   txtopenb.config(fg="black")
    buttony.config(fg="black")
    buttonbb.config(fg="black")
    buttonw.config(fg="black")
@@ -214,24 +215,20 @@ def orange():
    with open ('Settings.ini', 'w') as f:
      config.write(f)
 
-def txtsave2():
-   
-   global desktop
-
-   desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-   txtsave3 = txtsave.get()
-
-   global filename
-   filename = os.path.join(desktop, txtsave9)
-
-   with open(filename, "w") as f:
-      f.write(txtsave3 + "\n")
-
 def txtsave4():
-   global txtsave9
-   txtsave9 = txtsavebuttonentry.get()
-   filename = os.path.join(desktop, txtsave9)
+    txt51 = txtsave.get()
+    path = filedialog.asksaveasfile(
+      defaultextension=".txt",
+      mode="w"
+   )
 
+    if path:
+      path.write(txt51)
+
+def txtsave999():
+   pathopen = filedialog.askopenfile(mode="r")
+   pathread = pathopen.read()
+   txtopenl.config(text=pathread)
 
 label = tk.Label(win, text="0", font=("Arial", 25))
 label.pack(pady=20)
@@ -294,28 +291,22 @@ LightTheme2.pack()
 DefaultTheme2 = tk.Button(win, text="DefaultTheme", command=DefaultTheme)
 DefaultTheme2.pack()
 
+global txtsave
+
 txtsave = tk.Entry(win)
 txtsave.pack()
 
-txtsave.bind("<Return>", txtsave2)
 
-labeltxtsave = tk.Label(win, text="Enter the second you stopped in the box above and press the button below to save, and make sure to fill in the box before pressing the button.", font=("Arial", 8))
-labeltxtsave.pack()
+txtsave.bind("<Return>", txtsave4)
 
-txtsavebutton = tk.Button(win, text="Save", command=txtsave2)
+txtsavebutton = tk.Button(win, text="Save", command=txtsave4)
 txtsavebutton.pack()
 
-txtsavebuttonentry = tk.Entry(win)
-txtsavebuttonentry.pack()
+txtopenl = tk.Label(win, text="", font=("Arial", 9))
+txtopenl.pack()
 
-labeltxtsave9 = tk.Label(win, text="Fill in the box above. We will save this. You can specify your file name and extension, and then press the Rename File button to save both the file name and its extension.", font=("Arial", 7))
-labeltxtsave9.pack()
-
-txtbutton2 = tk.Button(win, text="Filename Change", command=txtsave4)
-txtbutton2.pack()
-
-txtsavebuttonentry.bind("<Return>", txtsave4)
-
+txtopenb = tk.Button(win, text="open", command=txtsave999)
+txtopenb.pack()
 
 config = configparser.ConfigParser()
 
